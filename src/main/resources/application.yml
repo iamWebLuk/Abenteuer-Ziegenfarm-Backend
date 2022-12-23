@@ -15,7 +15,7 @@ spring:
     password: xitrust
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: update
     show-sql: true
     properties:
       hibernate:
@@ -35,3 +35,5 @@ name:
   vorname: lukas
   nachname: weber
 
+jwt:
+  token: eAFuv79OOfCQW1NSG8mCqiGbNOdIRbJR
