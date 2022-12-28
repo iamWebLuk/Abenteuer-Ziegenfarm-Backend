@@ -2,12 +2,22 @@ package com.example.demo;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
+import java.net.PasswordAuthentication;
 
 @SpringBootTest
 class BackendApplicationTests {
 
 	@Test
 	void contextLoads() {
+	}
+
+	@Test
+	void getEncryptedPassword() {
+		PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		System.out.println(passwordEncoder.encode("asdf"));
 	}
 
 }

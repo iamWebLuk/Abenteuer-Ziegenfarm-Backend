@@ -25,6 +25,8 @@ spring:
     user:
       name: admin
       password: secret
+    filter:
+      order: 10
 
 server:
   error:

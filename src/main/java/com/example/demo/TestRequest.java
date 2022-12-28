@@ -1,10 +1,18 @@
 package com.example.demo;
 
+import com.example.demo.Student.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.time.LocalDate;
+import java.time.Month;
 
 @RestController
 public class TestRequest {
@@ -43,4 +51,13 @@ public class TestRequest {
             return e.toString();
         }
     }
+
+    @PutMapping("/changeName")
+   public HttpStatus changeName(@RequestParam String name, @RequestParam LocalDate date, Integer id) {
+        if (name.isEmpty() || id == 2) {
+            return HttpStatus.FORBIDDEN;
+        }
+        return HttpStatus.OK;
+    }
 }
+

@@ -7,6 +7,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.server.Ssl;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Component;
 import org.springframework.web.util.WebUtils;
 
 import javax.servlet.http.Cookie;
@@ -16,11 +17,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
+@Component
 public class JWTUtil {
 
     private static final Long serialVersionID = 388123721837213L;
 
-    private static final Integer JWT_TOKEN_VALIDITY = 30*24*60*60;
+    private static final Integer JWT_TOKEN_VALIDITY = 30 * 24 * 60 * 60 * 60;
 
     @Value("${jwt.token}")
     private String secret;
@@ -67,11 +69,11 @@ public class JWTUtil {
 
     }
 
-//    public Boolean canTokenBeRefreshed(String token) {
-//
-//    }
-//    public Boolean validateToken(String token, UserDetails userDetails) {
-//        return true;
-//    }
+    public Boolean canTokenBeRefreshed(String token) {
+        return true;
+    }
+    public Boolean validateToken(String token, UserDetails userDetails) {
+        return true;
+    }
 
 }
