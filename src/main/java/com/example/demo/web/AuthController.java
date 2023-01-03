@@ -45,4 +45,21 @@ private JWTUtil jwtUtil;
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
     }
+
+    @PostMapping(path = "register")
+    public ResponseEntity<?> register(@RequestBody AuthCredentialRequest request) {
+        try {
+        Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));
+
+        User user = (User)authenticate.getPrincipal();
+        user.setPassword("");
+        return ResponseEntity.ok().body(user.getUsername());
+    }
+        catch (Exception e) {
+            System.out.println(e);
+            return ResponseEntity.status(HttpStatus.BANDWIDTH_LIMIT_EXCEEDED).build();
+        }
+    }
+
+
 }
