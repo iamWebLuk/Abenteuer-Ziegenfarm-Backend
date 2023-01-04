@@ -24,16 +24,15 @@ public class AssignmentService {
         return assignmentRepo.save(assignment);
     }
 
-    public Assignment update(User user, String gitHubURL, String branch, String status) {
+    public Assignment update(User user, String gitHubURL, String branch, String status, Long id) {
         Assignment assignment = new Assignment();
-            assignment.setId(user.getId());
+            assignment.setId(id);
             if (gitHubURL != null && branch != null && status != null) {
             assignment.setGithubUrl(gitHubURL);
             assignment.setBranch(branch);
             assignment.setStatus(status);
             user.setPassword("");
             assignment.setUser(user);
-
             }
             return assignmentRepo.save(assignment);
     }
@@ -47,4 +46,7 @@ public class AssignmentService {
     }
 
 
+    public void delete(Long id) {
+        assignmentRepo.deleteById(id);
+    }
 }
