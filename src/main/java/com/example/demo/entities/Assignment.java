@@ -15,7 +15,7 @@ public class Assignment {
     private String status;
     private String githubUrl;
     private String branch;
-private String codeReviewVideoUrl;
+    private String codeReviewVideoUrl;
 
     @ManyToOne(optional = false)
     private User user;

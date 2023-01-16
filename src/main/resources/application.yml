@@ -30,12 +30,16 @@ spring:
 
 server:
   error:
-    include-message: always
+    include-message: always#
 
 name:
   enabled: true
   vorname: lukas
   nachname: weber
+
+sms:
+  config:
+    testing: false
 
 jwt:
   token: eAFuv79OOfCQW1NSG8mCqiGbNOdIRbJR
