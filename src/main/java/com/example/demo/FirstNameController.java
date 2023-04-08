@@ -6,9 +6,9 @@ import org.springframework.stereotype.Component;
 @Component
 @ConfigurationProperties(prefix = "name.vorname")
 public class FirstNameController {
-    public String vorname = "maria";
+    public String vorname = "lukas";
     public Boolean enabled = false;
-    public String nachname= "ennemoser";
+    public String nachname= "weber";
 
     public String getVorname() {
         return vorname;
