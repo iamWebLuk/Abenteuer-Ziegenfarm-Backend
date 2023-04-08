@@ -87,4 +87,10 @@ public class AuthController {
         return ResponseEntity.ok().build();
     }
 
+    @GetMapping("/validate")
+    public ResponseEntity<?> validateToken(@RequestParam String token, @AuthenticationPrincipal User user) {
+        Boolean isTokenValid = jwtUtil.validateToken(token, user);
+        return ResponseEntity.ok(isTokenValid);
+    }
+
 }
