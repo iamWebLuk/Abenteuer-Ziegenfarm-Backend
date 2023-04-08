@@ -35,7 +35,7 @@ public class StudentController {
 		return studentService.getStudent();
 	}
 
-	@PostMapping
+	@PostMapping(path = "/addANewUser")
 	public void registerNewStudent(@RequestBody Student student) {
 		studentService.addNewStudent(student);
 	}
