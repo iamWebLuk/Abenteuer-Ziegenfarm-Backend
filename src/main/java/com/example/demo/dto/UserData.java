@@ -1,27 +1,31 @@
-package com.example.demo.entities;
+package com.example.demo.dto;
 
 import com.example.demo.constants.AssignmentStatus;
+import com.example.demo.constants.Authorities;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.stereotype.Component;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import java.time.LocalDate;
+import java.util.Collection;
 
-@Entity
-public class Assignment {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+@Component
+public class UserData {
+
     private Long id;
-    private String nameOfAssignment;
-    private AssignmentStatus status = AssignmentStatus.READY;
+    private String username;
+    private Collection<GrantedAuthority> role;
+
+    private LocalDate cohortStartDate;
+
+    private AssignmentStatus status;
     private String githubUrl;
     private String branch;
     private String codeReviewVideoUrl;
 
-    @ManyToOne(optional = false)
-    private User user;
+    public UserData() {
+
+    }
 
     public Long getId() {
         return id;
@@ -31,12 +35,28 @@ public class Assignment {
         this.id = id;
     }
 
-    public String getNameOfAssignment() {
-        return nameOfAssignment;
+    public String getUsername() {
+        return username;
     }
 
-    public void setNameOfAssignment(String nameOfAssignment) {
-        this.nameOfAssignment = nameOfAssignment;
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public Collection<GrantedAuthority> getRole() {
+        return role;
+    }
+
+    public void setRole(Collection<GrantedAuthority> role) {
+        this.role = role;
+    }
+
+    public LocalDate getCohortStartDate() {
+        return cohortStartDate;
+    }
+
+    public void setCohortStartDate(LocalDate cohortStartDate) {
+        this.cohortStartDate = cohortStartDate;
     }
 
     public AssignmentStatus getStatus() {
@@ -69,13 +89,5 @@ public class Assignment {
 
     public void setCodeReviewVideoUrl(String codeReviewVideoUrl) {
         this.codeReviewVideoUrl = codeReviewVideoUrl;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 }

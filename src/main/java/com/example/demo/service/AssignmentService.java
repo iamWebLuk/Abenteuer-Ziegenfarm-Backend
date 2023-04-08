@@ -1,5 +1,8 @@
 package com.example.demo.service;
 
+import com.example.demo.constants.AssignmentStatus;
+import com.example.demo.dto.AssignmentData;
+import com.example.demo.dto.UserData;
 import com.example.demo.entities.Assignment;
 import com.example.demo.entities.User;
 import com.example.demo.repository.AssignmentRepository;
@@ -16,7 +19,7 @@ public class AssignmentService {
     private AssignmentRepository assignmentRepo;
     public Assignment save(User user) {
         Assignment assignment = new Assignment();
-        assignment.setStatus("needs to be submitted");
+//        assignment.setStatus("needs to be submitted");
         user.setPassword("");
         assignment.setUser(user);
 
@@ -24,15 +27,15 @@ public class AssignmentService {
         return assignmentRepo.save(assignment);
     }
 
-    public Assignment update(User user, String gitHubURL, String branch, String status, Long id) {
+    public Assignment update(User user, String gitHubURL, String branch, AssignmentStatus status, Long id, String assignmentName) {
         Assignment assignment = new Assignment();
             assignment.setId(id);
             if (gitHubURL != null && branch != null && status != null) {
             assignment.setGithubUrl(gitHubURL);
             assignment.setBranch(branch);
             assignment.setStatus(status);
-            user.setPassword("");
             assignment.setUser(user);
+            assignment.setNameOfAssignment(assignmentName);
             }
             return assignmentRepo.save(assignment);
     }
