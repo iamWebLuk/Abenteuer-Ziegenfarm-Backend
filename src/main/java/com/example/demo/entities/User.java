@@ -1,5 +1,6 @@
 package com.example.demo.entities;
 
+import com.example.demo.constants.Authorities;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -15,7 +16,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "Users")
-public class User  implements UserDetails {
+public class User implements UserDetails{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -81,7 +82,7 @@ public class User  implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> roles = new ArrayList<>();
-        roles.add(new Authority("ROLE_STUDENT"));
+        roles.add(new Authority(Authorities.ROLE_STUDENT));
         return null;
     }
 }
