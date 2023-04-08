@@ -22,7 +22,7 @@ public class JWTUtil {
 
     private static final Long serialVersionID = 388123721837213L;
 
-    private static final Integer JWT_TOKEN_VALIDITY = 30 * 24 * 60 * 60 * 60;
+    private static final Integer JWT_TOKEN_VALIDITY =  30 * 24 * 60 * 60 * 60;
 
     @Value("${jwt.token}")
     private String secret;
@@ -72,8 +72,10 @@ public class JWTUtil {
     public Boolean canTokenBeRefreshed(String token) {
         return true;
     }
+
     public Boolean validateToken(String token, UserDetails userDetails) {
-        return true;
+        final String username = getUserNameFromToken(token);
+        return (userDetails != null && username.equals(userDetails.getUsername()) && !isTokenExpired(token));
     }
 
 }

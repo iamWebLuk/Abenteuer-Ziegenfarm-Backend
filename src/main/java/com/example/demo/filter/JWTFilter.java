@@ -1,5 +1,6 @@
 package com.example.demo.filter;
 
+import com.example.demo.entities.User;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.util.JWTUtil;
 import org.springframework.beans.factory.annotation.Autowired;
