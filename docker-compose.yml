@@ -1,0 +1,28 @@
+version: '3.7'
+
+services:
+  app:
+    image: back-end:latest
+    build:
+      context: .
+    ports:
+      - '8080:8080'
+  postgres:
+    image: postgres:15
+    ports:
+      - '5432:5432'
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=xitrust
+    volumes:
+      - data:/var/lib/postgresql/data
+  pg-admin:
+    image: dpage/pgadmin4:6
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@email.com
+      - PGADMIN_DEFAULT_PASSWORD=admin
+      - PGADMIN_LISTEN_PORT=5050
+    ports:
+      - '5050-5050'
+volumes:
+  data:
