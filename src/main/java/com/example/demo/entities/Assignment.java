@@ -14,11 +14,12 @@ public class Assignment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String nameOfAssignment;
+    private String assignmentName;
     private AssignmentStatus status = AssignmentStatus.READY;
     private String githubUrl;
     private String branch;
     private String codeReviewVideoUrl;
+
 
     @ManyToOne(optional = false)
     private User user;
@@ -31,12 +32,12 @@ public class Assignment {
         this.id = id;
     }
 
-    public String getNameOfAssignment() {
-        return nameOfAssignment;
+    public String getAssignmentName() {
+        return assignmentName;
     }
 
-    public void setNameOfAssignment(String nameOfAssignment) {
-        this.nameOfAssignment = nameOfAssignment;
+    public void setAssignmentName(String assignmentName) {
+        this.assignmentName = assignmentName;
     }
 
     public AssignmentStatus getStatus() {

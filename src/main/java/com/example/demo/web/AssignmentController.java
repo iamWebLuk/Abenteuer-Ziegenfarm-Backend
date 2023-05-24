@@ -1,7 +1,6 @@
 package com.example.demo.web;
 
 import com.example.demo.dto.AssignmentData;
-import com.example.demo.dto.UserData;
 import com.example.demo.entities.Assignment;
 import com.example.demo.entities.User;
 import com.example.demo.service.AssignmentService;
@@ -40,13 +39,14 @@ public class AssignmentController {
     @CrossOrigin
     @PutMapping(path = "/{id}")
     public ResponseEntity<?> updateAssignment(@AuthenticationPrincipal User user, @RequestBody Assignment assignment, @PathVariable Long id) {
-        Assignment newAssignment = assignmentService.update(user, assignment.getGithubUrl(), assignment.getBranch(), assignment.getStatus(), id, assignment.getNameOfAssignment());
+        Assignment newAssignment = assignmentService.update(user, assignment.getAssignmentName(), assignment.getGithubUrl(), assignment.getBranch(), assignment.getStatus(), id);
         AssignmentData assignmentData = new AssignmentData();
         assignmentData.setId(newAssignment.getId());
         assignmentData.setStatus(assignment.getStatus());
         assignmentData.setGithubUrl(assignment.getGithubUrl());
-        assignmentData.setBranch(assignmentData.getBranch());
+        assignmentData.setBranch(assignment.getBranch());
         assignmentData.setCodeReviewVideoUrl(assignment.getCodeReviewVideoUrl());
+        assignmentData.setAssignmentName(assignment.getAssignmentName());
         return ResponseEntity.ok(assignmentData);
     }
 
@@ -55,18 +55,18 @@ public class AssignmentController {
     @GetMapping(path = "")
     public ResponseEntity<?> getAssignments(@AuthenticationPrincipal User user) {
         Set<Assignment> userSet = assignmentService.findByUser(user);
-        Set<UserData> userData = new HashSet<>();
+        Set<AssignmentData> assignmentData = new HashSet<>();
         for (Assignment users: userSet) {
-            UserData currentUserData = new UserData();
-            currentUserData.setId(users.getId());
-            currentUserData.setCohortStartDate(users.getUser().getCohortStartDate());
-            currentUserData.setGithubUrl(users.getGithubUrl());
-            currentUserData.setBranch(users.getBranch());
-            currentUserData.setStatus(users.getStatus());
-            currentUserData.setCodeReviewVideoUrl(users.getCodeReviewVideoUrl());
-            userData.add(currentUserData);
+            AssignmentData assignment = new AssignmentData();
+            assignment.setId(users.getId());
+            assignment.setAssignmentName(users.getAssignmentName());
+            assignment.setGithubUrl(users.getGithubUrl());
+            assignment.setBranch(users.getBranch());
+            assignment.setCodeReviewVideoUrl(users.getCodeReviewVideoUrl());
+            assignment.setStatus(users.getStatus());
+            assignmentData.add(assignment);
         }
-        return ResponseEntity.ok().body(userData);
+        return ResponseEntity.ok().body(assignmentData);
     }
 
     @GetMapping(path = "/{id}")
@@ -79,6 +79,7 @@ public class AssignmentController {
             assignmentData.setGithubUrl(userSet.get().getGithubUrl());
             assignmentData.setBranch(userSet.get().getBranch());
             assignmentData.setCodeReviewVideoUrl(userSet.get().getCodeReviewVideoUrl());
+            assignmentData.setAssignmentName(userSet.get().getAssignmentName());
         }
         return ResponseEntity.ok(assignmentData);
     }

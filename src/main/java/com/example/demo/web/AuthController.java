@@ -1,6 +1,7 @@
 package com.example.demo.web;
 
 import com.example.demo.dto.AuthCredentialRequest;
+import com.example.demo.dto.UserData;
 import com.example.demo.entities.Authority;
 import com.example.demo.entities.User;
 import com.example.demo.repository.AuthorityRepository;
@@ -17,6 +18,7 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -44,20 +46,23 @@ public class AuthController {
     @Autowired
     AuthorityService authorityService;
 
-    @PostMapping(path = "login")
+    @CrossOrigin
+    @PostMapping(path = "/login")
     public ResponseEntity<?> login(@RequestBody AuthCredentialRequest request) {
         try {
             Authentication authenticate = authenticationManager
                     .authenticate(new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));
 
             User user = (User) authenticate.getPrincipal();
-            user.setPassword("");
+            UserData userdata = new UserData();
+            userdata.setId(user.getId());
+            userdata.setUsername(user.getUsername());
             return ResponseEntity.ok()
                     .header(
                             HttpHeaders.AUTHORIZATION,
                             jwtUtil.generateToken(user)
                     )
-                    .body(user);
+                    .body(userdata);
         } catch (BadCredentialsException ex) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
@@ -91,6 +96,16 @@ public class AuthController {
     public ResponseEntity<?> validateToken(@RequestParam String token, @AuthenticationPrincipal User user) {
         Boolean isTokenValid = jwtUtil.validateToken(token, user);
         return ResponseEntity.ok(isTokenValid);
+    }
+
+    @CrossOrigin
+    @GetMapping("/userInfo")
+    public ResponseEntity<?> getUserInfo(@AuthenticationPrincipal User user) {
+        UserData userData = new UserData();
+        userData.setId(user.getId());
+        userData.setUsername(user.getUsername());
+
+        return ResponseEntity.ok(userData);
     }
 
 }

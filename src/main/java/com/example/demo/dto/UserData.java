@@ -14,14 +14,7 @@ public class UserData {
 
     private Long id;
     private String username;
-    private Collection<GrantedAuthority> role;
-
-    private LocalDate cohortStartDate;
-
-    private AssignmentStatus status;
-    private String githubUrl;
-    private String branch;
-    private String codeReviewVideoUrl;
+//    private Collection<GrantedAuthority> role;
 
     public UserData() {
 
@@ -43,51 +36,12 @@ public class UserData {
         this.username = username;
     }
 
-    public Collection<GrantedAuthority> getRole() {
-        return role;
-    }
+//    public Collection<GrantedAuthority> getRole() {
+//        return role;
+//    }
 
-    public void setRole(Collection<GrantedAuthority> role) {
-        this.role = role;
-    }
+//    public void setRole(Collection<GrantedAuthority> role) {
+//        this.role = role;
+//    }
 
-    public LocalDate getCohortStartDate() {
-        return cohortStartDate;
-    }
-
-    public void setCohortStartDate(LocalDate cohortStartDate) {
-        this.cohortStartDate = cohortStartDate;
-    }
-
-    public AssignmentStatus getStatus() {
-        return status;
-    }
-
-    public void setStatus(AssignmentStatus status) {
-        this.status = status;
-    }
-
-    public String getGithubUrl() {
-        return githubUrl;
-    }
-
-    public void setGithubUrl(String githubUrl) {
-        this.githubUrl = githubUrl;
-    }
-
-    public String getBranch() {
-        return branch;
-    }
-
-    public void setBranch(String branch) {
-        this.branch = branch;
-    }
-
-    public String getCodeReviewVideoUrl() {
-        return codeReviewVideoUrl;
-    }
-
-    public void setCodeReviewVideoUrl(String codeReviewVideoUrl) {
-        this.codeReviewVideoUrl = codeReviewVideoUrl;
-    }
 }

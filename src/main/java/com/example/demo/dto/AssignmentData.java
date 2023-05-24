@@ -11,6 +11,7 @@ import javax.persistence.ManyToOne;
 
 public class AssignmentData {
         private Long id;
+        private String assignmentName;
         private AssignmentStatus status;
         private String githubUrl;
         private String branch;
@@ -24,7 +25,15 @@ public class AssignmentData {
             this.id = id;
         }
 
-        public AssignmentStatus getStatus() {
+    public String getAssignmentName() {
+        return assignmentName;
+    }
+
+    public void setAssignmentName(String assignmentName) {
+        this.assignmentName = assignmentName;
+    }
+
+    public AssignmentStatus getStatus() {
             return status;
         }
 

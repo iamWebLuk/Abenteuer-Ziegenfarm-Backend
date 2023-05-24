@@ -27,15 +27,15 @@ public class AssignmentService {
         return assignmentRepo.save(assignment);
     }
 
-    public Assignment update(User user, String gitHubURL, String branch, AssignmentStatus status, Long id, String assignmentName) {
+    public Assignment update(User user, String assignmentName, String gitHubURL, String branch, AssignmentStatus status, Long id) {
         Assignment assignment = new Assignment();
             assignment.setId(id);
             if (gitHubURL != null && branch != null && status != null) {
-            assignment.setGithubUrl(gitHubURL);
-            assignment.setBranch(branch);
-            assignment.setStatus(status);
-            assignment.setUser(user);
-            assignment.setNameOfAssignment(assignmentName);
+                assignment.setAssignmentName(assignmentName);
+                assignment.setGithubUrl(gitHubURL);
+                assignment.setBranch(branch);
+                assignment.setStatus(status);
+                assignment.setUser(user);
             }
             return assignmentRepo.save(assignment);
     }
